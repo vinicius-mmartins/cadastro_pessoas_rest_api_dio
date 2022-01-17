@@ -1,5 +1,6 @@
 package one.dio.viniciusmmartins.cadastro_pessoa_rest_api.controller;
 
+import lombok.AllArgsConstructor;
 import one.dio.viniciusmmartins.cadastro_pessoa_rest_api.dto.MessageResponseDTO;
 import one.dio.viniciusmmartins.cadastro_pessoa_rest_api.dto.request.PersonDTO;
 import one.dio.viniciusmmartins.cadastro_pessoa_rest_api.exception.PersonNotFoundException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/people")
+//@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
     private PersonService personService;
@@ -33,11 +35,13 @@ public class PersonController {
     }
 
     @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
         return personService.findById(id);
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody PersonDTO personDTO) throws PersonNotFoundException {
         return personService.updateById(id, personDTO);
     }
